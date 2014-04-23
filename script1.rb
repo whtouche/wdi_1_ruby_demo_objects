@@ -233,7 +233,7 @@ class Person
   def initialize(fname, lname, dob_str)
     @first_name = fname
     @last_name = lname
-    @dob = DateTime.strptime(dob_str, '%m-%d-%Y').to_date
+
     @years_to_live = 79 - age
   end
 
@@ -363,22 +363,16 @@ puts "Jack has #{jack.years_to_live} years to live"
 # Another feature. Lets take off 7 years for smokers. Only current
 # smokers.
 
+# Inheritence
+# We want to re-use the Person class but it has all kinds of behavior only
+# used for calculating life insurance.
 
-# Create an insurance company with a name
-aetna = InsuranceCompany.new("Aetna")
-puts "Insurance Company is #{aetna.name}"
+# Lets create a InsuredPerson that is a subclass of Person.
+# Move the expected_death_year to InsuredPerson class.
 
-aetna.add_client(jill)
-aetna.add_client(tom)
-aetna.add_client(jack)
-
-aetna.clients.each do |client|
-  puts "Client is #{client.full_name}"
-end
-
-
-# Ask InsuranceCompany for all clients that should NOT be given life insurance.
-
+# Class variables/methods
+# Give the Insured People a ins_id.
+# It should be calculated from calling a InsuredPerson.generate_id method.
 
 # Create a whole bunch of clients in the insure_clients.rb
 require 'faker'

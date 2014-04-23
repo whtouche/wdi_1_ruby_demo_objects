@@ -1,0 +1,10 @@
+- create_insurance_company.rb
+- create_person.rb
+- add_insured_clients.rb
+- get_clients_by_lname.rb
+- person_attributes.rb
+- sell_person_insurance.rb
+- factor_marriage.rb
+- refactor_ytl.rb (same as above)
+Lab:
+   Add seven years for non-smokers.
