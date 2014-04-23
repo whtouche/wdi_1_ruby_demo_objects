@@ -3,7 +3,7 @@ require 'chronic'
 
 class Person
   attr_reader :first_name, :dob, :years_to_live
-  attr_accessor :last_name, :married
+  attr_accessor :last_name, :married, :smokes
 
   def initialize(fname, lname, dob_str)
     @first_name = fname
@@ -14,6 +14,11 @@ class Person
   def is_married?
     married
   end
+
+  def smokes?
+    smokes
+  end
+
   # getter method
   # def first_name
   #   @first_name
@@ -37,18 +42,5 @@ class Person
   def age
     now = Date.today
     now.year - dob.year - (now.strftime('%m%d') < dob.strftime('%m%d') ? 1 : 0)
-  end
-
-  def expected_death_year
-    Chronic.parse("#{years_to_live} years from now").year
-  end
-
-  def give_insurance?
-    years_to_live > 20
-  end
-
-  private
-  def years_to_live
-    79 - age + (is_married? ? 5: 0)
   end
 end

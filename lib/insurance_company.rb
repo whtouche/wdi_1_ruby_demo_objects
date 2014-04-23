@@ -1,4 +1,4 @@
-require_relative 'person'
+require_relative './insured_person'
 
 class InsuranceCompany
   def initialize(company_name)

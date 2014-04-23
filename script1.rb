@@ -370,9 +370,16 @@ puts "Jack has #{jack.years_to_live} years to live"
 # Lets create a InsuredPerson that is a subclass of Person.
 # Move the expected_death_year to InsuredPerson class.
 
+# create a another test for adding insured clients
+# add_insured_clients2.rb
+
 # Class variables/methods
-# Give the Insured People a ins_id.
+# Give the Insured People an id when they are created,'ins_id'.
 # It should be calculated from calling a InsuredPerson.generate_id method.
+
+# Create a method to generate ids for InsuredPersons
+# Lab:
+# Create a method to find all the People that can be insured. Use InsuredPerson.give_insurance?
 
 # Create a whole bunch of clients in the insure_clients.rb
 require 'faker'

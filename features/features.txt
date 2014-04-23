@@ -6,5 +6,15 @@
 - sell_person_insurance.rb
 - factor_marriage.rb
 - refactor_ytl.rb (same as above)
+
 Lab:
    Add seven years for non-smokers.
+
+- smokers.rb
+- insured_person.rb
+
+Lab:
+- add_insured_clients2.rb
+
+- add_insured_person_id.rb
+- add_insured_client_id.rb
