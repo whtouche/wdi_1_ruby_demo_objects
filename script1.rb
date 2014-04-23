@@ -378,6 +378,7 @@ puts "Jack has #{jack.years_to_live} years to live"
 # It should be calculated from calling a InsuredPerson.generate_id method.
 
 # Create a method to generate ids for InsuredPersons
+
 # Lab:
 # Create a method to find all the People that can be insured. Use InsuredPerson.give_insurance?
 
@@ -386,6 +387,16 @@ require 'faker'
 # make sure you run bundle install to get these gems.
 
 # Lab
+# Human/Superhero AND Car classes and objects.
+# https://github.com/ga-wdi-boston/wdi_1_ruby_lab_objects_classes
+
+# Alternative Lab
+# class_methods_modules_lab.txt
+#
+# Homework
+# Rental-App
+# https://github.com/ga-wdi-boston/wdi_1_ruby_hw_objects_rental_app
+
 # Write a Junk Yard mgmt app.
 # It will have Cars.
 # Cars will have a make, model, year, current value and date received.
