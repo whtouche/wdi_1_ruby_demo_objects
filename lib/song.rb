@@ -1,4 +1,7 @@
 class Song
+  attr_reader :title, :desc, :duration
+  attr_accessor :price
+
   def initialize(title, desc, duration, price)
     @title = title
     @desc = desc
@@ -6,20 +9,4 @@ class Song
     @price = price
   end
 
-  def title
-    @title
-  end
-  def desc
-    @desc
-  end
-  def duration
-    @duration
-  end
-  def price
-    @price
-  end
-
-  def price=(price)
-    @price = price
-  end
 end
