@@ -21,4 +21,9 @@ class InsuranceCompany
   def get_clients
     @clients
   end
+
+  # get all my clients
+  def get_smokers
+    get_clients.select{ |client| client.smoke_cigarettes}
+  end
 end
