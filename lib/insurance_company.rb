@@ -1,4 +1,4 @@
-require_relative 'person'
+require_relative 'insurance_person'
 
 # InsuranceCompany class
 # Camel Case - each word is capitalized.
