@@ -6,17 +6,15 @@ Ruby, like other OO languages, allows the creation of data types. So, far we've 
 
 We're going to do this while we create a application for the Life Insurance industry. 
 
-We're going to define a set of _User Stories_ that a Life Insurance applicaton would have. We'll develop these stories as we discover and learn what is required from this type of application.
-
 Along the way we'll going to learn a lot about how Ruby gives us the tools to create well designed and implemented applications and programs.
 
-Along the way, we are going to learn about:
+Along the way we are going to learn about some of the below. _What we don't get to we will in another lesson_:
 
 * Classes
 * Objects and how they are created. Object are also know as instances of a class.
 * Instance attributes/variables
 * Defining Behavior with instance and class methods.
-* Sending messages to objects.
+* Sending messages to objects, _invoking methods_.
 * Instance methods. 
 	* Getters - methods that expose object/instance attributes.
 	* Setters - methods that allow one to set an object/instance attributes.
@@ -32,11 +30,11 @@ Along the way, we are going to learn about:
 * YAGNI (You aint going to need it)
 * Pry Debugger, stepping through code.
 * Ruby's inspect method. Handy for debugging.
-* Ruby 'require', just the most basic.
+* Ruby 'require'.
 
 
 ## Life Insurance application.
-We're going to create a Life Insurance Command Line application. It will allow the user, _typically a Insurance Agent or an Employee of the company_, to insure people if they meet a certain set of constraints. 
+We're going to create a Life Insurance application. It will allow the user, _typically a Insurance Agent or an Employee of the company_, to insure people if they meet a certain set of constraints. 
 
 We want to insure people that will _likely_ live for over 20 years. How we calculate a person's lifespan is based on a set of their behaviors, backgrounds and genetics.
 

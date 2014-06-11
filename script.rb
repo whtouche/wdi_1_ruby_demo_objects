@@ -134,12 +134,12 @@ class Person
     "#{@first_name} #{@last_name}"
   end
 
-  # instance attribute/variable 'getter' method, aka 'getter'
+  # instance variable 'getter' method, aka 'getter'
   def first_name
     @first_name
   end
 
-  # instance attribute/variable 'getter' method, aka 'getter'
+  # instance variable 'getter' method, aka 'getter'
   def last_name
     @last_name
   end
@@ -191,11 +191,31 @@ puts "jill's name is #{jill.full_name}"
 # RIGHT NOW, by the specfic app you writing.
 
 # Don't try to guess what the future behaviors this class will
-# need. It's a common fail, you'll never know less than now what your
-# app needs from this Person class. You'll know more as app features
-# are needed in the future!
+# need. 
+# It's a common fail, you'll never know less about your app than
+# right now!
+# You'll discover more about whats needed when the app is actually
+# being used.
 
 # YAGNI - You aint gonna need it!
+
+
+############################################
+# LAB 
+############################################
+# Create a Song class that will have:
+# But this in  the lib directory.
+# A title, artist_name, duration (seconds) and price.
+# Add ONLY the appropriate accessors (getters/setters)
+
+# In another file, in the bin dir:
+# Create 3 songs
+# Show the songs.
+# Calculate and show the average duration and price.
+# Change the one or more songs attributes.
+# Calculate and show the average duration and price.
+
+
 
 # Lets talk about a shorter way to create 'getters' and 'setters'
 class Person
@@ -218,6 +238,10 @@ end
 # attr_writer - creates a setter method
 # attr_accessor - creates a getter and setter method.
 
+############################################
+# LAB 
+############################################
+# Update the Song class and app to use the attr_* 
 
 # Lets give people a dob, age, years_to_live, ...
 # Maybe this is part of a life insurance app?
@@ -237,7 +261,7 @@ class Person
     @years_to_live = 79 - age
   end
 
-  # age getter to calculate the age from dob
+  # calculate the age from dob
   def age
     now = Date.today
     now.year - dob.year - (now.strftime('%m%d') < dob.strftime('%m%d') ? 1 : 0)
@@ -250,6 +274,7 @@ now").year
   end
 
   def give_insurance?
+    # Huh? What is this bang, bang?
     !!(@years_to_live > 20)
   end
 end
@@ -264,6 +289,17 @@ jill = Person.new('jill','stein', '5-13-1990')
 puts "jill is #{jill.age} years old"
 puts "Jill will likely die in #{jill.expected_death_year}"
 puts "Jill should be sold insurance?  #{jill.give_insurance?}"
+
+
+############################################
+# LAB 
+############################################
+# Update the Song class to have a release date and artist percentage.
+# Note, these will never change.
+# Add the following behavior to your app.
+# Calculate the % of price given to artist.
+# For every 5 years that the song is available decrease the
+# artist percentage by 5 percent.
 
 # Research shows people that are married live 5 years longer than single
 # Update the class to reflect this research
@@ -302,7 +338,7 @@ puts "Jack should be sold insurance?  #{jack.give_insurance?}"
 # We'll it works BUT
 # But we had to make the changes in two places for this new feature.
 # LAB: (group with neighor)
-# Q: How migth we improve this implementation. Hint: make code change
+# Q: How might we improve this implementation. Hint: make code change
 # in one place?
 
 
