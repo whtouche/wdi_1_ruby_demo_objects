@@ -5,7 +5,7 @@ What are the Ruby Data Types we've learned about already? Lets create our own Da
 
 ## Demo
 
-We create a Person class/data type. This will act as a kind of "template" when creating people.
+We'll  create a Person class/data type. This will act as a kind of "template" when creating people.
 
 __class__ is a keyword in Ruby.  
 
@@ -76,13 +76,13 @@ jill = Person.new('jill', 'Pill')
 
 
 puts "tom is #{tom}"
-puts "tom is #{jill}"
+puts "jill is #{jill}"
 
 puts "tom is #{tom.inspect}"
 ```
 
-Not using inspect just prints out some strangeness. It kind of looks like a memory address, maybe the object_id of tom and jill
-
+Not using inspect just prints out some strangeness. It kind of looks like a memory address in hexadecimal?
+o
 #### inspect method
 The inspect method, helpful for debugging.  
 
