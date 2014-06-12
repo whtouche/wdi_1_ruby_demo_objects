@@ -1,11 +1,12 @@
 require 'date' # So that we can use strptime
+
 # This is a Ruby class
 class Person
   # Generate a getter for the instance variable @first_name
   attr_reader :first_name, :dob
 
   # Generate a getter and setter for the instance variable @last_name
-  attr_accessor :last_name, :current_smoker, :married
+  attr_accessor :last_name, :married
 
   # Called when a new instance of the class (Person) is created
   # dob_str must be in 'm-d-Y' ## upper case letters = 4 digits
@@ -17,29 +18,14 @@ class Person
     @last_name = lname
     @dob = Date.strptime(dob_str, '%m-%d-%Y')
     @years_to_live = 79 - age
-    @current_smoker = false
     @married = false
-  end
-
-  # Defining method so that we can use question mark (?) as boolean conevntion
-  def current_smoker?
-    @current_smoker
   end
 
   def married?
     @married
   end
 
-  def give_insurance?
-    ytl = @years_to_live
-    if current_smoker?
-      ytl -= 7
-    end
-    if married?
-      ytl += 5
-    end
-    ytl > 20
-  end
+
 
   #instance method for age
   def age
@@ -49,10 +35,6 @@ class Person
 
   def full_name
     @first_name + ' ' + @last_name
-  end
-
-  def years_to_live
-    (79 - age) - ( current_smoker? ? -7 : 0) + ( married? ? 5 : 0)
   end
 
 end
