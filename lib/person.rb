@@ -14,6 +14,12 @@ class Person
     @married = false
   end
 
+  # this is an instance method.
+  # It can only be called on a object, i.e. instance of Person.
+  def full_name
+    "#{@first_name} #{@last_name}"
+  end
+
   def married?
     married
   end
@@ -31,13 +37,10 @@ class Person
     !!(years_to_live > 20)
   end
 
+  private
+  
   def years_to_live
     @years_to_live = 79 - age + (married? ? 5 : 0)
   end
   
-  # this is an instance method.
-  # It can only be called on a object, i.e. instance of Person.
-  def full_name
-    "#{@first_name} #{@last_name}"
-  end
 end
