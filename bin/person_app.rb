@@ -58,4 +58,6 @@ msg = tom.give_insurance ? "should" : "should not"
 puts "We #{msg} give #{tom.full_name} insurance"
 
 # Should 'say' I've changed my status to active
-tom.status = 'active'
+# tom.status = 'active'
+tom.signed_contract
+puts "Tom's status is #{tom.status}"

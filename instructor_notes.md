@@ -381,13 +381,12 @@ class Person
 end
 ```
 ##### Add this to the person app, lib/person_app.rb.
-
+```
  # tom is married, so he should live 5 years longer, maybe                       
 tom.married = true
 puts "Tom will likey croak in #{tom.expected_death_year}"
 msg = tom.give_insurance ? "should" : "should not"
 puts "We #{msg} give #{tom.full_name} insurance"
-
 ```
 
 We'll it works BUT we had to make the changes in two places for this new feature.
@@ -478,8 +477,8 @@ class Person
      %x{ say "#{full_name} has changed their status to #{status}"}
   end
 
-  def singed_contract
-  	# will not call notify method in setter
+  def signed_contract
+    # will not call notify method in setter
     # @status = 'active'
     
     # will ONLY set the method's local variable
@@ -491,16 +490,30 @@ class Person
 end
   
 ```
+```
+ # Should 'say' I've changed my status to active                                 
+ # tom.status = 'active'                                                         
+ tom.signed_contract
+ puts "Tom's status is #{tom.status}"
+```
 
 
-
-### Inheritence
+### Inheritance
 We want to re-use the Person class but it has all kinds of behavior only used for calculating life insurance.
 
-Lets create a InsuredPerson that is a subclass of Person. Move the expected_death_year to InsuredPerson class.
+Lets create a InsuredPerson that is a subclass of Person. Move the expected_death_year and maybe other methods to the InsuredPerson class.
 
 Why?
 
+## Modules
+
+### Used a namespace
+
+### Used as a Mixin  
+
+Create a Rabbit and Parrot class. Then create a Talk module that will _say_ something. 
+
+Mix this Talk module into the Person and Parrot classes.
 
 
 ### Class variables/methods

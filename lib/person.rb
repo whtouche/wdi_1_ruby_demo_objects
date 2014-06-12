@@ -47,6 +47,16 @@ class Person
     @status = new_status
     %x{ say "#{full_name} has changed their status to #{status}"}
   end
+
+  def signed_contract
+    # will NOT call status method, no we wont 'say' anything
+    # @status = 'active'
+    # ONLY changes a local variable, status
+    # status = 'active'
+
+    # Yes, this call the object's status method
+    self.status = 'active'
+  end
   
   private
   
