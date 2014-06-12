@@ -5,7 +5,7 @@ What are the Ruby Data Types we've learned about already? Lets create our own Da
 
 ## Demo
 
-We create a Person class/data type. This will act as a kind of "template" when creating people.
+We'll  create a Person class/data type. This will act as a kind of "template" when creating people.
 
 __class__ is a keyword in Ruby.  
 
@@ -76,13 +76,13 @@ jill = Person.new('jill', 'Pill')
 
 
 puts "tom is #{tom}"
-puts "tom is #{jill}"
+puts "jill is #{jill}"
 
 puts "tom is #{tom.inspect}"
 ```
 
-Not using inspect just prints out some strangeness. It kind of looks like a memory address, maybe the object_id of tom and jill
-
+Not using inspect just prints out some strangeness. It kind of looks like a memory address in hexadecimal?
+o
 #### inspect method
 The inspect method, helpful for debugging.  
 
@@ -286,9 +286,6 @@ Lets give people a dob, age, years_to_live, ...
 Remember, this is going to be a life insurance app?
 
 ```
- # Ruby gem to handle time.
-require 'chronic'
-
 class Person
   attr_reader :first_name, :dob
   attr_accessor :last_name
@@ -297,6 +294,8 @@ class Person
   def initialize(fname, lname, dob_str)
     @first_name = fname
     @last_name = lname
+
+    @dob = Date.strptime(dob_str, '%m-%d-%Y')
 
     @years_to_live = 79 - age
   end
@@ -309,13 +308,16 @@ class Person
 
   # Get the expected death year for person
   def expected_death_year
-     Chronic.parse("#{@years_to_live} years from
-now").year
+    Date.today.year + @years_to_live
   end
 
   def give_insurance?
     # Huh? What is this bang, bang?
-    !!(@years_to_live > 20)
+    !!(years_to_live > 20)
+  end
+
+  def years_to_live
+    @years_to_live = expected_death_year - Date.today.year
   end
 end
 ```
@@ -323,15 +325,15 @@ end
 ##### Add this to the person app, lib/person_app.rb.
 
 ```
-jack = Person.new('jack','sprat', '4-4-1952')
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
+puts "Jill's age is #{jill.age}"
+puts "Tom's age is #{tom.age}"
 
-jill = Person.new('jill','stein', '5-13-1990')
-puts "jill is #{jill.age} years old"
-puts "Jill will likely die in #{jill.expected_death_year}"
-puts "Jill should be sold insurance?  #{jill.give_insurance?}"
+puts "Jill will likey croak in #{jill.expected_death_year}"
+puts "Tom will likey croak in #{tom.expected_death_year}"
+
+# Change Tom’s birth year above, to check this out.
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
 
 ```
 
@@ -343,7 +345,7 @@ _Note, these attributes will never change._
 
 Add the following behavior to your app.  
 * Create a method to give the artist a percentage of the price.  
-* Initially, at release, an artist will get 20% of the price.   
+* Initially, at release, an artist will get 20% of the price. Need a new attribute here.  
 * For every 5 years that the song is available decrease the artist percentage by 5 percent.  
 
 #### Demo
@@ -356,37 +358,35 @@ Update the class to reflect this research
 class Person
   attr_accessor :married
 
-  def is_married?
+  def married?
     married
   end
 
   # Get the expected death year for person
   def expected_death_year
-    if is_married?
-      Chronic.parse("#{@years_to_live + 5} years from now").year.to_s
+   if married?
+      Date.today.year + @years_to_live + 5
     else
-      Chronic.parse("#{@years_to_live} years from now").year.to_s
+      Date.today.year + @years_to_live
     end
   end
 
-  def give_insurance?
-    ytl = @years_to_live
-    if is_married?
-      ytl += 5
-    end
-    ## Huh? bang, bang?
-    !!(ytl > 20)
+   def give_insurance
+    !!(years_to_live > 20)
+  end
+  
+  def years_to_live
+    @years_to_live = expected_death_year - Date.today.year
   end
 end
 ```
 ##### Add this to the person app, lib/person_app.rb.
-
 ```
-jack = Person.new('jack','sprat', '4-4-1952')
-jack.married = true
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
+ # tom is married, so he should live 5 years longer, maybe                       
+tom.married = true
+puts "Tom will likey croak in #{tom.expected_death_year}"
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
 ```
 
 We'll it works BUT we had to make the changes in two places for this new feature.
@@ -403,33 +403,20 @@ How might we _refactor_ this to remove duplication in this implementation. Hint:
 
 ```
 class Person
-  attr_accessor :married
 
-  def initialize(fname, lname, dob_str)
-    @first_name = fname
-    @last_name = lname
-    @dob = DateTime.strptime(dob_str, '%m-%d-%Y').to_date
-    # @years_to_live = 79 - age remove
+  def expected_death_year
+      Date.today.year + years_to_live
+  end
+
+  def give_insurance
+    !!(years_to_live > 20)
   end
 
   def years_to_live
-    79 - age + (is_married? ? 5: 0)
+    @years_to_live = 79 - age + (married? ? 5 : 0)
   end
 
-  # Get the expected death year for person
-  def expected_death_year
-      Chronic.parse("#{years_to_live} years from now").year.to_s
-  end
-
-  def give_insurance?
-    !!(years_to_live > 20)
-  end
 end
-jack = Person.new('jack','sprat', '4-4-1952')
-jack.married = true
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
 ```
 
 We "Refactored" the years_to_live calculation to check for a marriage. method. This Helped improve the class by reducing the number of places in we needed to change code.
@@ -453,13 +440,7 @@ class Person
 end
 ```
 
-```
-puts "Jack has #{jack.years_to_live} years to live"
 
- # NoMethodError
- # private method `years_to_live' called for #<Person:0x007fab08e99d40> (NoMethodError)
-
-```
 ### Lab
 Add another feature. Lets take off 7 years for smokers. Only current smokers.
 
@@ -493,11 +474,11 @@ class Person
   
   def status=(new_status)
     @status = new_status
-    notify()
+     %x{ say "#{full_name} has changed their status to #{status}"}
   end
 
-  def singed_contract
-  	# will not call notify method in setter
+  def signed_contract
+    # will not call notify method in setter
     # @status = 'active'
     
     # will ONLY set the method's local variable
@@ -509,16 +490,30 @@ class Person
 end
   
 ```
+```
+ # Should 'say' I've changed my status to active                                 
+ # tom.status = 'active'                                                         
+ tom.signed_contract
+ puts "Tom's status is #{tom.status}"
+```
 
 
-
-### Inheritence
+### Inheritance
 We want to re-use the Person class but it has all kinds of behavior only used for calculating life insurance.
 
-Lets create a InsuredPerson that is a subclass of Person. Move the expected_death_year to InsuredPerson class.
+Lets create a InsuredPerson that is a subclass of Person. Move the expected_death_year and maybe other methods to the InsuredPerson class.
 
 Why?
 
+## Modules
+
+### Used a namespace
+
+### Used as a Mixin  
+
+Create a Rabbit and Parrot class. Then create a Talk module that will _say_ something. 
+
+Mix this Talk module into the Person and Parrot classes.
 
 
 ### Class variables/methods
