@@ -24,11 +24,7 @@ class Person
   end
 
   def expected_death_year
-    if married?
-      Date.today.year + @years_to_live + 5
-    else
-      Date.today.year + @years_to_live
-    end
+      Date.today.year + years_to_live
   end
 
   def give_insurance
@@ -36,7 +32,7 @@ class Person
   end
 
   def years_to_live
-    @years_to_live = expected_death_year - Date.today.year
+    @years_to_live = 79 - age + (married? ? 5 : 0)
   end
   
   # this is an instance method.

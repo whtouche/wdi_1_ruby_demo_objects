@@ -405,24 +405,19 @@ How might we _refactor_ this to remove duplication in this implementation. Hint:
 ```
 class Person
 
-  def years_to_live
-    79 - age + (is_married? ? 5: 0)
-  end
-
-  # Get the expected death year for person
   def expected_death_year
-      Chronic.parse("#{years_to_live} years from now").year.to_s
+      Date.today.year + years_to_live
   end
 
-  def give_insurance?
+  def give_insurance
     !!(years_to_live > 20)
   end
+
+  def years_to_live
+    @years_to_live = 79 - age + (married? ? 5 : 0)
+  end
+
 end
-jack = Person.new('jack','sprat', '4-4-1952')
-jack.married = true
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
 ```
 
 We "Refactored" the years_to_live calculation to check for a marriage. method. This Helped improve the class by reducing the number of places in we needed to change code.
