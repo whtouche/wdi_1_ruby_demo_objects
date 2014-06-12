@@ -341,7 +341,7 @@ _Note, these attributes will never change._
 
 Add the following behavior to your app.  
 * Create a method to give the artist a percentage of the price.  
-* Initially, at release, an artist will get 20% of the price.   
+* Initially, at release, an artist will get 20% of the price. Need a new attribute here.  
 * For every 5 years that the song is available decrease the artist percentage by 5 percent.  
 
 #### Demo
