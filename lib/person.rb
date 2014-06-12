@@ -3,7 +3,7 @@ require 'date'
 class Person
   # no need to change the first name and dob
   attr_reader :first_name, :dob
-  attr_accessor :last_name, :married
+  attr_accessor :last_name, :married, :current_smoker
 
   # dob_str format must be '%m-%d-Y'
   def initialize(fname, lname, dob_str)
@@ -12,6 +12,7 @@ class Person
     @dob = Date.strptime(dob_str, '%m-%d-%Y')
     @years_to_live = 79 - age
     @married = false
+    @current_smoker = false
   end
 
   # this is an instance method.
@@ -22,6 +23,10 @@ class Person
 
   def married?
     married
+  end
+
+  def current_smoker?
+    current_smoker
   end
   
   def age
@@ -40,7 +45,7 @@ class Person
   private
   
   def years_to_live
-    @years_to_live = 79 - age + (married? ? 5 : 0)
+    @years_to_live = 79 - age + (married? ? 5 : 0) - (current_smoker? ? 7 : 0)
   end
   
 end

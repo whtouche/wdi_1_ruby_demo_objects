@@ -47,6 +47,12 @@ puts "We #{msg} give #{tom.full_name} insurance"
 
 # tom is married, so he should live 5 years longer, maybe
 tom.married = true
-puts "Tom will likey croak in #{tom.expected_death_year}"
+puts "Tom got married he will likey croak in #{tom.expected_death_year}"
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
+
+# tom is a current smoker. So he should die 7 years earlier
+tom.current_smoker = true
+puts "Tom is a current smoker,  he will likey croak in #{tom.expected_death_year}"
 msg = tom.give_insurance ? "should" : "should not"
 puts "We #{msg} give #{tom.full_name} insurance"

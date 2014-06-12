@@ -441,13 +441,7 @@ class Person
 end
 ```
 
-```
-puts "Jack has #{jack.years_to_live} years to live"
 
- # NoMethodError
- # private method `years_to_live' called for #<Person:0x007fab08e99d40> (NoMethodError)
-
-```
 ### Lab
 Add another feature. Lets take off 7 years for smokers. Only current smokers.
 
