@@ -1,8 +1,8 @@
 # This will "insert" the contents of the person.rb here
 require_relative '../lib/person.rb'
 
-tom = Person.new('Tom', 'Dyer')
-jill = Person.new('Jill', 'Stein')
+tom = Person.new('Tom', 'Dyer', '6-2-1947')
+jill = Person.new('Jill', 'Stein', '5-13-1990')
 
 puts "Tom is #{tom}"
 puts "Jill is #{jill}"
@@ -36,4 +36,13 @@ puts "Jill's last name is #{jill.full_name}"
 # Shouldn't be able to change the first name
 # undefined method
 # jill.first_name = 'jane'
+
+puts "Jill's age is #{jill.age}"
+puts "Tom's age is #{tom.age}"
+
+puts "Jill will likey croak in #{jill.expected_death_year}"
+puts "Tom will likey croak in #{tom.expected_death_year}"
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
+
 

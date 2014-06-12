@@ -286,9 +286,6 @@ Lets give people a dob, age, years_to_live, ...
 Remember, this is going to be a life insurance app?
 
 ```
- # Ruby gem to handle time.
-require 'chronic'
-
 class Person
   attr_reader :first_name, :dob
   attr_accessor :last_name
@@ -297,6 +294,8 @@ class Person
   def initialize(fname, lname, dob_str)
     @first_name = fname
     @last_name = lname
+
+    @dob = Date.strptime(dob_str, '%m-%d-%Y')
 
     @years_to_live = 79 - age
   end
@@ -309,8 +308,7 @@ class Person
 
   # Get the expected death year for person
   def expected_death_year
-     Chronic.parse("#{@years_to_live} years from
-now").year
+    Date.today.year + @years_to_live
   end
 
   def give_insurance?
@@ -323,15 +321,15 @@ end
 ##### Add this to the person app, lib/person_app.rb.
 
 ```
-jack = Person.new('jack','sprat', '4-4-1952')
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
+puts "Jill's age is #{jill.age}"
+puts "Tom's age is #{tom.age}"
 
-jill = Person.new('jill','stein', '5-13-1990')
-puts "jill is #{jill.age} years old"
-puts "Jill will likely die in #{jill.expected_death_year}"
-puts "Jill should be sold insurance?  #{jill.give_insurance?}"
+puts "Jill will likey croak in #{jill.expected_death_year}"
+puts "Tom will likey croak in #{tom.expected_death_year}"
+
+# Change Tom’s birth year above, to check this out.
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
 
 ```
 

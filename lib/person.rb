@@ -1,29 +1,30 @@
+require 'date'
+
 class Person
-  attr_reader :first_name # no need to change the first name
+  # no need to change the first name and dob
+  attr_reader :first_name, :dob
   attr_accessor :last_name
-  
-  def initialize(fname, lname)
+
+  # dob_str format must be '%m-%d-Y'
+  def initialize(fname, lname, dob_str)
     @first_name = fname
     @last_name = lname
+    @dob = Date.strptime(dob_str, '%m-%d-%Y')
+    @years_to_live = 79 - age
   end
 
-  # # accessor, "getter" for the first_name
-  # def first_name
-  #   @first_name
-  # end
+  def age
+    now = Date.today
+    now.year - dob.year - ((now.strftime('%m%d') < dob.strftime('%m%d')) ? 1 : 0)
+  end
 
-  # # accessor, "getter" for the last_name
-  # def last_name
-  #   @last_name
-  # end
+  def expected_death_year
+   Date.today.year + @years_to_live
+  end
 
-  # # No accessor for the first name.
-  # # It never changes!!
-  
-  # # accessor, "setter" for the last_name
-  # def last_name=(last_name)
-  #   @last_name = last_name
-  # end
+  def give_insurance
+    !!(@years_to_live > 20)
+  end
   
   # this is an instance method.
   # It can only be called on a object, i.e. instance of Person.
