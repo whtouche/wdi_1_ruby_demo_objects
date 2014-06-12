@@ -1,7 +1,7 @@
 # This will "insert" the contents of the person.rb here
 require_relative '../lib/person.rb'
 
-tom = Person.new('Tom', 'Dyer', '6-2-1947')
+tom = Person.new('Tom', 'Dyer', '6-2-1952')
 jill = Person.new('Jill', 'Stein', '5-13-1990')
 
 puts "Tom is #{tom}"
@@ -45,4 +45,8 @@ puts "Tom will likey croak in #{tom.expected_death_year}"
 msg = tom.give_insurance ? "should" : "should not"
 puts "We #{msg} give #{tom.full_name} insurance"
 
-
+# tom is married, so he should live 5 years longer, maybe
+tom.married = true
+puts "Tom will likey croak in #{tom.expected_death_year}"
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"

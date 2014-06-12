@@ -313,7 +313,11 @@ class Person
 
   def give_insurance?
     # Huh? What is this bang, bang?
-    !!(@years_to_live > 20)
+    !!(years_to_live > 20)
+  end
+
+  def years_to_live
+    @years_to_live = expected_death_year - Date.today.year
   end
 end
 ```
@@ -354,37 +358,36 @@ Update the class to reflect this research
 class Person
   attr_accessor :married
 
-  def is_married?
+  def married?
     married
   end
 
   # Get the expected death year for person
   def expected_death_year
-    if is_married?
-      Chronic.parse("#{@years_to_live + 5} years from now").year.to_s
+   if married?
+      Date.today.year + @years_to_live + 5
     else
-      Chronic.parse("#{@years_to_live} years from now").year.to_s
+      Date.today.year + @years_to_live
     end
   end
 
-  def give_insurance?
-    ytl = @years_to_live
-    if is_married?
-      ytl += 5
-    end
-    ## Huh? bang, bang?
-    !!(ytl > 20)
+   def give_insurance
+    !!(years_to_live > 20)
+  end
+  
+  def years_to_live
+    @years_to_live = expected_death_year - Date.today.year
   end
 end
 ```
 ##### Add this to the person app, lib/person_app.rb.
 
-```
-jack = Person.new('jack','sprat', '4-4-1952')
-jack.married = true
-puts "Jack is #{jack.age} years old"
-puts "Jack will likely die in #{jack.expected_death_year}"
-puts "Jack should be sold insurance?  #{jack.give_insurance?}"
+ # tom is married, so he should live 5 years longer, maybe                       
+tom.married = true
+puts "Tom will likey croak in #{tom.expected_death_year}"
+msg = tom.give_insurance ? "should" : "should not"
+puts "We #{msg} give #{tom.full_name} insurance"
+
 ```
 
 We'll it works BUT we had to make the changes in two places for this new feature.
@@ -401,14 +404,6 @@ How might we _refactor_ this to remove duplication in this implementation. Hint:
 
 ```
 class Person
-  attr_accessor :married
-
-  def initialize(fname, lname, dob_str)
-    @first_name = fname
-    @last_name = lname
-    @dob = DateTime.strptime(dob_str, '%m-%d-%Y').to_date
-    # @years_to_live = 79 - age remove
-  end
 
   def years_to_live
     79 - age + (is_married? ? 5: 0)
