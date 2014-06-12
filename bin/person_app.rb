@@ -56,3 +56,6 @@ tom.current_smoker = true
 puts "Tom is a current smoker,  he will likey croak in #{tom.expected_death_year}"
 msg = tom.give_insurance ? "should" : "should not"
 puts "We #{msg} give #{tom.full_name} insurance"
+
+# Should 'say' I've changed my status to active
+tom.status = 'active'

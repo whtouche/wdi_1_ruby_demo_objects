@@ -3,7 +3,7 @@ require 'date'
 class Person
   # no need to change the first name and dob
   attr_reader :first_name, :dob
-  attr_accessor :last_name, :married, :current_smoker
+  attr_accessor :last_name, :married, :current_smoker, :status
 
   # dob_str format must be '%m-%d-Y'
   def initialize(fname, lname, dob_str)
@@ -13,6 +13,7 @@ class Person
     @years_to_live = 79 - age
     @married = false
     @current_smoker = false
+    @status = 'inactive'
   end
 
   # this is an instance method.
@@ -42,6 +43,11 @@ class Person
     !!(years_to_live > 20)
   end
 
+  def status=(new_status)
+    @status = new_status
+    %x{ say "#{full_name} has changed their status to #{status}"}
+  end
+  
   private
   
   def years_to_live

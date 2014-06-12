@@ -475,7 +475,7 @@ class Person
   
   def status=(new_status)
     @status = new_status
-    notify()
+     %x{ say "#{full_name} has changed their status to #{status}"}
   end
 
   def singed_contract
