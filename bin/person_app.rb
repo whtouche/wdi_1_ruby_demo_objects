@@ -28,7 +28,12 @@ puts "Jill's last name is #{jill.last_name}"
 puts "Jill's last name is #{jill.last_name}"
 
 # Who's going to fix this for me?
-jill.last_name=('Smith')
+jill.last_name= 'Smith'
 puts "Jill's last name is #{jill.full_name}"
 
 # YAGNI. You aint gonna need it!
+
+# Shouldn't be able to change the first name
+# undefined method
+# jill.first_name = 'jane'
+
